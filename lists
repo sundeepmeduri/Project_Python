@@ -1,0 +1,83 @@
+
+
+
+cor = ['hist','math','comp','phy']
+print(cor)
+print(len(cor))
+print(cor[1]) # second value
+print(cor[0:2]) # first 2 values
+print(cor[-1]) # last value
+print(cor[-2]) # second from last
+#print(cor[4]) # error since there is no fifth elemet
+print(cor[0:4]) # returns all elements
+print(cor[:5]) # even when 5 element is not present it will return the rest
+print(cor[2:]) # prints second element till last
+
+cor.append('art') # adds the element at last
+print(cor)
+
+cor.insert(0,'sci') # inserts element at specific index and wont override. The other elements will shift position
+print(cor)
+
+cor2 = ['games']
+cor.extend(cor2) # extend method help add another list elements in existing
+# Note: if you use cor.insert(cor2) then it will add the element as list but not as element of the list
+print(cor)
+
+cor.remove('math') # removes specific element
+print(cor) 
+cor.pop() # by default removes last element
+print(cor)
+popped = cor.pop() # this will remove last element in list and also assign it to popped variable
+print(popped)
+cor.reverse() # reverse the list
+print(cor)
+cor.sort() # sort the list
+print(cor)
+cor.sort(reverse=True) # sort in desc order
+print(cor)
+print(sorted(cor)) # will return sorted list instead of sorting the actual list
+nums = [5,3,7,4,9]
+print(min(nums))
+print(max(nums))
+print(sum(nums))
+print(nums.index(3)) # returns index of element in list
+
+print('sci' in cor) # returns true or false 
+
+if 'sci1' in cor:
+	print('present')
+else:
+	print('not present')
+
+
+for i in cor:
+	print(i)	
+
+for i,d in enumerate(cor):	
+	print(i,d)
+
+for i,d in enumerate(cor,start=1):	
+	print(i,d)
+
+print('-----')
+cor_str=', '.join(cor)
+print(cor_str)
+
+cor_str=' - '.join(cor)
+print(cor_str)
+
+new_list = cor_str.split(' - ')
+print(new_list)
+
+list1 = [1,2,3,4]
+list2 = list1
+list1.append(5) # now the list2 will also get modified and gets new element appended as well. becaue the list is mutable object
+print(list1)
+print(list2)
+
+
+
+
+
+
