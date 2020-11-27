@@ -1,2 +1,39 @@
 Dictionaries:
 --------------
+stu = {'name':'sundeep','age':25,'courses':['ssis','ssrs','ssas'],1:'value'}
+
+print(stu)
+print(stu['name'])
+print(stu['courses'])
+print(stu[1])
+#print(stu['key']) # throws error if we try to access key which does not exist
+print(stu.get('name'))
+print(stu.get('key')) # if we use get method to access which does not exist then it will not
+					# throw any error
+if stu.get('key','not found') == 'not found': # we can pass some default value when key does not exist.
+	print('key does not exist')
+
+stu['phone'] = '3333333' # this will add new key to the dict
+print(stu['phone'])
+stu['phone'] = '999999' # this will update the key if it already exists
+print(stu['phone'])
+key = 'key'
+name = 'newkey'
+stu.update({key:name,'age':35}) # we can add or update multiple key values using update method.
+print(stu)
+
+del stu['key']
+print(stu)
+age = stu.pop('age')
+print(stu,age)
+
+print(len(stu)) # returns how many key/value pairs are there
+
+print(stu.keys()) # retuns only keys
+print(stu.values()) # returns only values
+print(stu.items()) # returns both keys & values
+
+for key,val in stu.items():
+	print(key,val)
+
+
