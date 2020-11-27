@@ -1,0 +1,25 @@
+Tuple:
+-------
+ a tuple is immutable object and once created we can modify ,inser or delete anything in the tuple. tuple is created using the round brackets.
+ tuple1 = (1,2,3,4)
+ if we need modifications all we need to is convert the tuple into list, make changes and assign back to the tuple
+ 
+ 
+ sets:
+ --------
+ a set is created using {}. when we create set the elemensts in the set are always unordered. A set will not allow duplicates.
+ set1 = {1,2,3,4}
+ print(set1) # every time you execute this 
+ print(1 in set1) # Set is best used to determine the element is present or not.
+ 
+ set1 = {1,2,3,4}
+ set2 = {3,4,5}
+print(set.union(set2))
+print(set.intersection(set2))
+print(set.difference(set2))
+# the above union, intersecion and union gives better performance with set than list and tuple.
+
+ 
+ 
+ 
+ 
