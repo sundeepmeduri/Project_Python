@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Power Query ETL - Upload</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Power Query ETL</a>
+    </nav>
+    <div class="container mt-4">
+        <h1>Upload a CSV File</h1>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="fileInput" name="file" accept=".csv" onchange="displayFileName()">
+                    <label class="custom-file-label" for="fileInput">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById('fileInput');
+            const fileName = fileInput.value.split('\\').pop(); // Get the file name from the full path
+            const customFileLabel = document.querySelector('.custom-file-label');
+            customFileLabel.textContent = fileName;
+        }
+    </script>
+</body>
+</html>

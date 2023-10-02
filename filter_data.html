@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Power Query ETL - Filter Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add CSS to fix the table header */
+        .table-fixed thead {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+        }
+        .table-fixed tbody {
+            height: 400px; /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Power Query ETL</a>
+    </nav>
+    <div class="container mt-4">
+        <!-- Add button to go back to File Information screen -->
+        <div class="mb-3">
+            <a class="btn btn-primary" href="/file_info/{{ filename }}">Back to File Information</a>
+        </div>
+        <h2>Filter Data</h2>
+        <p><strong>File Name:</strong> {{ filename }}</p>
+        <p><strong>Number of Records:</strong> {{ num_records }}</p>
+        <!-- Add toggle button for showing/hiding filters -->
+        <button class="btn btn-info" id="toggleFilters">Show Filters</button>
+        <div id="filterContainer" style="display: none;">
+            <h3>Data Filters</h3>
+            <form method="POST" action="/filter_data/{{ filename }}">
+                {% for column in columns %}
+                    <div class="form-group">
+                        <label for="{{ column }}">{{ column }}</label>
+                        <input type="text" class="form-control" id="{{ column }}" name="{{ column }}">
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Apply Filters</button>
+            </form>
+        </div>
+        <h3>Filtered Data</h3>
+        <!-- Add horizontal scrolling and fixed table header to the Filtered Data table -->
+        <div class="table-responsive table-fixed" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in filtered_data %}
+                        <tr>
+                            {% for value in row %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- JavaScript to toggle filters -->
+    <script>
+        document.getElementById("toggleFilters").addEventListener("click", function () {
+            var filterContainer = document.getElementById("filterContainer");
+            if (filterContainer.style.display === "none" || filterContainer.style.display === "") {
+                filterContainer.style.display = "block";
+                this.textContent = "Hide Filters";
+            } else {
+                filterContainer.style.display = "none";
+                this.textContent = "Show Filters";
+            }
+        });
+    </script>
+</body>
+</html>

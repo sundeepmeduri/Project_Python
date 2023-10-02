@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Power Query ETL - File Info</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* CSS for left-aligning columns and adding background color to headers */
+        .table th {
+            text-align: left; /* Left-align column headers */
+            background-color: #007bff; /* Blue background color for headers */
+            color: #fff; /* Text color for headers */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Power Query ETL</a>
+    </nav>
+    <div class="container mt-4">
+        <!-- Add button to go back to Upload screen -->
+        <div class="mb-3">
+            <a class="btn btn-primary" href="/upload">Back to Upload</a>
+        </div>
+        <h2>File Information</h2>
+        <p><strong>File Name:</strong> {{ filename }}</p>
+        <p><strong>Number of Records:</strong> {{ num_records }}</p>
+        <!-- Add button to navigate to Filter Data screen -->
+        <div class="mb-3">
+            <a class="btn btn-success" href="/filter_data/{{ filename }}">Filter Data</a>
+        </div>
+        <h3>Column Names and Data Types</h3>
+        <!-- Wrap the table in a div with a height of 600px and vertical scrollbar -->
+        <div style="max-height: 600px; overflow-y: auto;">
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    {{ column_info|safe }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
