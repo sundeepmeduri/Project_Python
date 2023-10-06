@@ -54,9 +54,30 @@
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand" href="#">CIBDA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- cards -->
     <div class="container mt-5">
         <!-- Total record count box -->
-        <h1 class="mb-4">ETL Job Status</h1>
+        <!-- h1 class="mb-4">ETL Job Status</h1> -->
 
         <!-- Rectangular boxes to display job counts -->
         <div class="row mb-4">
@@ -82,24 +103,35 @@
             </div>
         </div>
 
-        <!-- Filter form for job status -->
+        <!-- Filter form for job status, startdate, and enddate -->
         <form method="post" action="/">
-            <div class="form-group">
-                <label for="statusFilter">Filter by Status:</label>
-                <select name="statusFilter" id="statusFilter" class="form-control">
-                    <option value="">All</option>
-                    <option value="Success">Success</option>
-                    <option value="Failure">Failure</option>
-                    <option value="Error">Error</option>
-                </select>
+            <div class="row mb-4">
+                <div class="form-group col-md-3">
+                    <label for="statusFilter">Filter by Status:</label>
+                    <select name="statusFilter" id="statusFilter" class="form-control">
+                        <option value="">All</option>
+                        <option value="Success">Success</option>
+                        <option value="Failure">Failure</option>
+                        <option value="Error">Error</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="startDateFilter">Start Date:</label>
+                    <input type="date" name="startDateFilter" id="startDateFilter" class="form-control">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="endDateFilter">End Date:</label>
+                    <input type="date" name="endDateFilter" id="endDateFilter" class="form-control">
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-primary mt-4">Apply Filter</button>
+                </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">Apply Filter</button>
         </form>
 
         <!-- Table with sticky header, alternate row colors, and vertical scrollbar -->
         <div class="table-scrollable">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-secondary">
                 <thead>
                     <tr>
                         <th>Run ID</th>
