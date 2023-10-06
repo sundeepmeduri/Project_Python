@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ETL Job Status</title>
+    <!-- Include Bootstrap CSS from a CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Add background color to table headers */
+        table thead th {
+            background-color: #f5f5f5;
+        }
+
+        /* Alternate row colors for records */
+        table tbody tr:nth-child(even) td {
+            background-color: #f2f2f2;
+        }
+
+        table tbody tr:nth-child(odd) td {
+            background-color: #ffffff;
+        }
+
+        /* Make table headers sticky while scrolling */
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Add a vertical scrollbar to the table */
+        .table-scrollable {
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        /* Styling for the total record count box */
+        .total-record-box {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Total record count box -->
+        <h1 class="mb-4">ETL Job Status</h1>
+
+        <!-- Rectangular boxes to display job counts -->
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <div class="alert alert-primary">
+                    <strong>Total Jobs:</strong> {{ total_count }}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="alert alert-success">
+                    <strong>Success:</strong> {{ success_count }}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="alert alert-danger">
+                    <strong>Failure:</strong> {{ failure_count }}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="alert alert-warning">
+                    <strong>Error:</strong> {{ error_count }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter form for job status -->
+        <form method="post" action="/">
+            <div class="form-group">
+                <label for="statusFilter">Filter by Status:</label>
+                <select name="statusFilter" id="statusFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="Success">Success</option>
+                    <option value="Failure">Failure</option>
+                    <option value="Error">Error</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
+        </form>
+
+        <!-- Table with sticky header, alternate row colors, and vertical scrollbar -->
+        <div class="table-scrollable">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Run ID</th>
+                        <th>Batch ID</th>
+                        <th>Process Date</th>
+                        <th>Job Name</th>
+                        <th>Job ID</th>
+                        <th>Load Start Date</th>
+                        <th>Load End Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job_status in job_statuses %}
+                        <tr data-status="{{ job_status.Status }}">
+                            <td>{{ job_status.RunId }}</td>
+                            <td>{{ job_status.BatchId }}</td>
+                            <td>{{ job_status.ProcessDate }}</td>
+                            <td>{{ job_status.JobName }}</td>
+                            <td>{{ job_status.JobID }}</td>
+                            <td>{{ job_status.LoadStartDate }}</td>
+                            <td>{{ job_status.LoadEndDate }}</td>
+                            <td>{{ job_status.Status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JavaScript from a CDN (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
