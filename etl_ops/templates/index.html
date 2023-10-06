@@ -5,6 +5,11 @@
     <!-- Include Bootstrap CSS from a CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Include DataTables CSS and JavaScript from CDNs -->
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
     <style>
         /* Add background color to table headers */
         table thead th {
@@ -55,8 +60,8 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="#">CIBDA</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CIBDA ETL Operations </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -74,6 +79,7 @@
             </ul>
         </div>
     </nav>
+
     <!-- cards -->
     <div class="container mt-5">
         <!-- Total record count box -->
@@ -131,7 +137,7 @@
 
         <!-- Table with sticky header, alternate row colors, and vertical scrollbar -->
         <div class="table-scrollable">
-            <table class="table table-bordered table-secondary">
+            <table id="jobStatusTable" class="table table-bordered table-secondary">
                 <thead>
                     <tr>
                         <th>Run ID</th>
@@ -164,5 +170,9 @@
 
     <!-- Include Bootstrap JavaScript from a CDN (optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-</body>
+
+    <script>
+        // Initialize DataTable
+        $(document).ready(function() {
+            $('#jobStatusTable').DataTable(); 
 </html>
