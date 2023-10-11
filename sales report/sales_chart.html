@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .kpi-box {
+            background-color: skyblue;
+            padding: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .donut-chart {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sales Data Visualization</h1>
+
+    <!-- KPI boxes for Number of Sales and Total Sales Amount -->
+    <div class="kpi-box">
+        <h3>Number of Sales</h3>
+        <p>{{ total_sales }}</p>
+    </div>
+    <div class="kpi-box">
+        <h3>Total Sales Amount</h3>
+        <p>${{ total_sales_amount }}</p>
+    </div>
+
+    <!-- Donut chart for sales by product -->
+    <div class="chart-container">
+        <div class="donut-chart">
+            {{ donut_chart_html | safe }}
+        </div>
+    </div>
+
+    <div>
+        {{ chart_html | safe }}
+    </div>
+
+    <!-- Add a button to navigate to the Raw Data page -->
+    <a href="/raw_data">View Raw Data</a>
+</body>
+</html>
