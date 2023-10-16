@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Track Analysis</title>
+</head>
+<body>
+    <h1>Track Analysis</h1>
+
+    <h2>Top 10 Tracks by Stream</h2>
+    <ul>
+        {% for track, streams in top_tracks_streams.items() %}
+            <li>{{ track }} - {{ streams }} streams</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Top 10 Tracks by Playlists</h2>
+    <ul>
+        {% for track, playlists in top_tracks_playlists.items() %}
+            <li>{{ track }} - {{ playlists }} playlists</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Top 10 Tracks by Spotify Playlists</h2>
+    <ul>
+        {% for track, playlists in top_tracks_spotify.items() %}
+            <li>{{ track }} - {{ playlists }} playlists on Spotify</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Top 10 Tracks by Apple Playlists</h2>
+    <ul>
+        {% for track, playlists in top_tracks_apple.items() %}
+            <li>{{ track }} - {{ playlists }} playlists on Apple Music</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Top 10 Tracks by Deezer Playlists</h2>
+    <ul>
+        {% for track, playlists in top_tracks_deezer.items() %}
+            <li>{{ track }} - {{ playlists }} playlists on Deezer</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

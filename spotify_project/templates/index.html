@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Data Analysis</title>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chart {
+            width: 45%; /* Adjust the width as needed */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .table-container {
+            max-height: 400px; /* Adjust the maximum height as needed */
+            overflow-y: scroll; /* Add vertical scrollbar */
+        }
+    </style>
+</head>
+<body>
+    <h1>Artist Analysis</h1>
+
+    <h2>KPIs</h2>
+    <ul>
+        <li>Number of Tracks: {{ kpi_data['Number of Tracks'] }}</li>
+        <li>Number of Unique Artists: {{ kpi_data['Number of Unique Artists'] }}</li>
+    </ul>
+
+    <div class="chart-container">
+        <div class="chart">
+            <h2>Top 10 Artists with Most Playlists in Apple</h2>
+<!--            <img src="{{ url_for('static', filename='top_artists_songs.png') }}" alt="Top 10 Artists with Most Songs"> -->
+            <img src="data:image/png;base64,{{ img_base64_playlists_apple }}" alt="Top 10 Artists with Most Playlists in Apple" width="100%">
+
+        </div>
+        <div class="chart">
+            <h2>Top 10 Artists with Most Playlists in Spotify</h2>
+            <img src="data:image/png;base64,{{ img_base64_playlists }}" alt="Top 10 Artists with Most Playlists in Spotify" width="100%">
+        </div>
+    </div>
+
+    <div class="chart-container">
+
+        <div class="chart">
+            <h2>Top 10 Artists with Most Songs</h2>
+            <img src="data:image/png;base64,{{ img_base64_songs }}" alt="Top 10 Artists with Most Songs" width="800" height="500">
+        </div>
+
+        <div class="chart">
+            <h2>Top 10 Artists with Most Streams</h2>
+            <img src="data:image/png;base64,{{ img_base64_streams }}" alt="Top 10 Artists with Most Streams" width="800" height="500">
+        </div>
+    </div>
+
+    <h2>Track Data</h2>
+    <form method="POST">
+        <label for="artistFilter">Filter by Artist Name:</label>
+        <input type="text" name="artistFilter" id="artistFilter" value="{{ artist_filter }}">
+        <input type="submit" value="Apply Filter">
+    </form>
+
+    <div class="table-container"> <!-- Add a container for the table -->
+        <table>
+            <tr>
+                <th>Track Name</th>
+                <th>Artist(s) Name</th>
+                <th>In Spotify Playlists</th>
+                <th>In Apple Playlists</th>
+                <th>In Deezer Playlists</th>
+            </tr>
+            {% for index, row in track_data.iterrows() %}
+            <tr>
+                <td>{{ row['track_name'] }}</td>
+                <td>{{ row['artist(s)_name'] }}</td>
+                <td>{{ row['in_spotify_playlists'] }}</td>
+                <td>{{ row['in_apple_playlists'] }}</td>
+                <td>{{ row['in_deezer_playlists'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
