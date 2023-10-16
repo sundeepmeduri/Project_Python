@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Data</title>
+</head>
+<body>
+    <h1>Edit Data</h1>
+    <form method="POST" action="/edit_data/{{ data[0] }}">
+        <label for="experience">Hours Studied:</label>
+        <input type="text" id="experience" name="experience" value="{{ data[1] }}" required><br>
+
+        <label for="salary">Exam Score:</label>
+        <input type="text" id="salary" name="salary" value="{{ data[2] }}" required><br>
+
+        <button type="submit">Update</button>
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>

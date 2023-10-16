@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View All Records</title>
+</head>
+<body>
+    <h1>View All Records</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Exp in years</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in data %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>
+                    <a href="/edit_data/{{ record[0] }}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/data_entry">Add New Entry</a>
+    <a href="/">Back to Home</a>
+</body>
+</html>

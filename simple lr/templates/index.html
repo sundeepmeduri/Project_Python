@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Linear Regression</title>
+</head>
+<body>
+    <h1>Simple Linear Regression</h1>
+
+    <!-- Add a button to navigate to the View All page -->
+    <a href="/view_all">View All Records</a>
+
+    <form method="POST" action="/predict"> <!-- Change the action to /predict -->
+        <label for="new_hours">Enter exp in years:</label>
+        <input type="text" id="new_hours" name="new_hours" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction is defined %}
+    <p>Predicted Salary for {{ new_hours }} year of exp: {{ prediction }}</p>
+    {% endif %}
+</body>
+</html>
