@@ -83,3 +83,50 @@ def filter_data(filename):
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
     app.run(debug=True)
+----------------------------------------
+
+from flask import Flask, jsonify
+import pyodbc
+
+app = Flask(__name__)
+
+# Configure SQL Server connection
+server = 'your_server'
+database = 'your_database'
+username = 'your_username'
+password = 'your_password'
+driver = '{ODBC Driver 17 for SQL Server}'
+
+connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+
+def get_db_connection():
+    return pyodbc.connect(connection_string)
+
+@app.route('/table1', methods=['GET'])
+def get_table1_data():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, name, value FROM table1")
+        records = cursor.fetchall()
+        conn.close()
+        data = [{'id': rec[0], 'name': rec[1], 'value': rec[2]} for rec in records]
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+@app.route('/table2', methods=['GET'])
+def get_table2_data():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, description, amount FROM table2")
+        records = cursor.fetchall()
+        conn.close()
+        data = [{'id': rec[0], 'description': rec[1], 'amount': rec[2]} for rec in records]
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
