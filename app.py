@@ -130,3 +130,19 @@ def get_table2_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+let
+    Source = Json.Document(Web.Contents("https://your-domain.atlassian.net/rest/api/3/project/MYPROJ/versions", 
+        [
+            Headers = [
+                Authorization="Basic your_base64_encoded_auth",
+                #"Content-Type"="application/json"
+            ]
+        ])),
+    Releases = Table.FromList(Source, Record.FieldValues, {"Release"}),
+    Expanded = Table.ExpandRecordColumn(Releases, "Release", {"id", "name", "released", "releaseDate", "archived"})
+in
+    Expanded
