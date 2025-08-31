@@ -1,0 +1,5 @@
+{
+  "1": ["SELECT * FROM vwSalesOrderDetail", "output\\sales.csv"]
+}
+
+

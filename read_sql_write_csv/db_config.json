@@ -1,0 +1,11 @@
+{
+  "1": {
+    "server": "DESKTOP-EHI4MET\\SQLEXPRESS",
+    "database": "AdventureWorks2019"
+  },
+  "2": {
+    "server": "DESKTOP-EHI4MET\\SQLEXPRESS1",
+    "database": "AdventureWorks2019"
+  }
+
+}
