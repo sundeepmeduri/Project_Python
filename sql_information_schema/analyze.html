@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analyze {{ table_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            z-index: 2;
+        }
+        select[multiple] {
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="mb-4">🔍 Analysis for <code>{{ table_name }}</code></h2>
+
+    <!-- Row count -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">📊 Row Count</h5>
+            <p class="card-text fs-4">{{ row_count }}</p>
+        </div>
+    </div>
+
+    <!-- Column Selector -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">📌 Choose Columns to Display</h5>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="columns" class="form-label">Select one or more columns:</label>
+                    <select name="columns" id="columns" class="form-select" multiple size="6">
+                        {% for col in all_columns %}
+                            <option value="{{ col }}" {% if col in selected_columns %}selected{% endif %}>
+                                {{ col }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Schema -->
+    <h5 class="mb-3">🛠 Table Schema</h5>
+    <div class="table-container mb-4">
+        <table class="table table-bordered table-hover table-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Column Name</th>
+                    <th>Data Type</th>
+                    <th>Nullable</th>
+                    <th>Max Length</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for col in schema_columns %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ col.COLUMN_NAME }}</td>
+                    <td>{{ col.DATA_TYPE }}</td>
+                    <td>{{ col.IS_NULLABLE }}</td>
+                    <td>{{ col.CHARACTER_MAXIMUM_LENGTH if col.CHARACTER_MAXIMUM_LENGTH else '-' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sample rows -->
+    <h5 class="mb-3">📑 Sample Data (first 5 rows)</h5>
+    <div class="table-container">
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    {% for col in sample_columns %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sample_rows %}
+                <tr>
+                    {% for col in sample_columns %}
+                        <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-3">
+        <button class="btn btn-secondary btn-back" onclick="window.history.back();">
+            ← Back
+        </button>
+    </div>
+</div>
+</body>
+</html>
